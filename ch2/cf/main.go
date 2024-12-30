@@ -22,10 +22,20 @@ func main() {
 			fmt.Fprintf(os.Stderr, "cf: %v\n", err)
 			os.Exit(1)
 		}
-		f := tempconv.Fahrenheit(t)
-		c := tempconv.Celsius(t)
-		fmt.Printf("%s = %s, %s = %s\n",
-			f, tempconv.FToC(f), c, tempconv.CToF(c))
+		// f := tempconv.Fahrenheit(t)
+		// c := tempconv.Celsius(t)
+		// fmt.Printf("%s = %s, %s = %s\n",
+		// 	f, tempconv.FToC(f), c, tempconv.CToF(c))
+
+		kg := tempconv.Kilogram(t)
+		p := tempconv.Pounds(t)
+		ft := tempconv.Feet(t)
+		m := tempconv.Meters(t)
+
+		fmt.Printf("%g = %g, %g = %g\n",
+			kg, tempconv.KgtoP(kg), p, tempconv.PtoKg(p))
+		fmt.Printf("%g = %g, %g = %g", ft,
+			tempconv.FtoM(ft), m, tempconv.MtoF(m))
 	}
 }
 

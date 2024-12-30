@@ -9,7 +9,7 @@ package main
 
 import "fmt"
 
-const boilingF = 212.0
+const boilingF = 56.0
 
 func main() {
 	var f = boilingF

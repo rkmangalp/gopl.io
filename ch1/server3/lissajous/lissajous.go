@@ -1,38 +1,18 @@
-// lissajous.go
-package main
+package lissajous
 
 import (
-	"fmt"
 	"image"
 	"image/color"
 	"image/gif"
 	"io"
 	"log"
 	"math"
-	"math/rand"
-	"os"
-	"time"
+	"math/rand/v2"
 )
 
-func main() {
-	// // Create or open the out.gif file explicitly
-	outFile, err := os.Create("out.gif")
-	if err != nil {
-		log.Fatalf("Error creating output file: %v", err)
-	}
-	defer outFile.Close()
-
-	// Seed the random number generator using the current time
-	rand.Seed(time.Now().UTC().UnixNano())
-
-	// Generate the Lissajous figures and write them to out.gif
-	lissajous(outFile)
-
-}
-
-func lissajous(out io.Writer) {
+func Lissajous(out io.Writer, cycles int) {
 	const (
-		cycles  = 5     // number of complete x oscillator revolutions
+		// cycles  = 5     // number of complete x oscillator revolutions
 		res     = 0.001 // angular resolution
 		size    = 300   // image canvas covers [-size..+size]
 		nframes = 64    // number of animation frames
@@ -48,7 +28,7 @@ func lissajous(out io.Writer) {
 		img := image.NewPaletted(rect, generateGradientPalette(i, nframes))
 
 		// Generate points on the Lissajous curve
-		for t := 0.0; t < cycles*2*math.Pi; t += res {
+		for t := 0.0; t < float64(cycles)*2*math.Pi; t += res {
 			x := math.Sin(t)
 			y := math.Sin(t*freq + phase)
 
@@ -70,7 +50,7 @@ func lissajous(out io.Writer) {
 	if err != nil {
 		log.Fatalf("Error occurred while encoding the GIF: %v", err)
 	}
-	fmt.Println("GIF generated successfully and saved as out.gif")
+	// fmt.Println("GIF generated successfully and saved as out.gif")
 }
 
 // generateGradientPalette dynamically creates a gradient palette
